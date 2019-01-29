@@ -14,6 +14,10 @@ public class MovingCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.IsGameOver)
+        {
+            return;
+        }
         transform.position = new Vector3(transform.position.x, transform.position.y- movingSpeed * Time.deltaTime,transform.position.z);
     }
 }

@@ -31,4 +31,9 @@ public class Seed : MonoBehaviour
         Vector2 forceVector = (transform.position - touchPosition).normalized * force;
         rb.AddForce(forceVector);
     }
+
+    private void OnBecameInvisible()
+    {
+        GameManager.Instance.GameOver();
+    }
 }
