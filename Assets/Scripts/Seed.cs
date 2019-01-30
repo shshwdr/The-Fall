@@ -12,6 +12,29 @@ public class Seed : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "ground")
+        {
+            Debug.Log("hit ground");
+            Vector3 dir = (collision.transform.position - transform.position).normalized;
+            Vector3 hitPosition = transform.position;
+            Debug.Log("colli " + collision.transform.position + " self " + transform.position);
+            StartCoroutine(GenerateSprout(hitPosition));
+            GameManager.Instance.Win();
+        }
+    }
+
+
+    IEnumerator GenerateSprout(Vector3 hitPosition)
+    {
+        yield return new WaitForSeconds(1);
+        GameObject prefab = Resources.Load("Prefabs/sprout", typeof(GameObject)) as GameObject;
+        GameObject go = Instantiate(prefab);
+        go.transform.position = hitPosition;
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,6 +57,7 @@ public class Seed : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        Debug.Log("can't see me");
         GameManager.Instance.GameOver();
     }
 }
