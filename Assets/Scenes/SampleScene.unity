@@ -555,6 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingSpeed: 0.3
+  ground: {fileID: 1738650500}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -986,11 +987,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 589253999, guid: 02b4e6786b9489146a660bf29318ea70, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000061035156
+      value: -0.00012207031
       objectReference: {fileID: 0}
     - target: {fileID: 589253999, guid: 02b4e6786b9489146a660bf29318ea70, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00012207031
+      value: -0.00024414062
       objectReference: {fileID: 0}
     - target: {fileID: 589253999, guid: 02b4e6786b9489146a660bf29318ea70, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1486,7 +1487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738650500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.79, z: 0}
+  m_LocalPosition: {x: 0, y: -5.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

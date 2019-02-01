@@ -26,7 +26,6 @@ public class GameManager : Singleton<GameManager>
         {
             return;
         }
-        GameWinViewController.CreateGameWinView();
         IsWin = true;
     }
 

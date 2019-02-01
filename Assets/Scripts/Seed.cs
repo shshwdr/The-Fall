@@ -16,10 +16,10 @@ public class Seed : MonoBehaviour
     {
         if(collision.tag == "ground")
         {
-            Debug.Log("hit ground");
+            //Debug.Log("hit ground");
             Vector3 dir = (collision.transform.position - transform.position).normalized;
             Vector3 hitPosition = transform.position;
-            Debug.Log("colli " + collision.transform.position + " self " + transform.position);
+            //Debug.Log("colli " + collision.transform.position + " self " + transform.position);
             StartCoroutine(GenerateSprout(hitPosition));
             GameManager.Instance.Win();
         }
@@ -28,16 +28,25 @@ public class Seed : MonoBehaviour
 
     IEnumerator GenerateSprout(Vector3 hitPosition)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
         GameObject prefab = Resources.Load("Prefabs/sprout", typeof(GameObject)) as GameObject;
         GameObject go = Instantiate(prefab);
         go.transform.position = hitPosition;
-
+        StartCoroutine(ShowWinScreen());
+    }
+    IEnumerator ShowWinScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        GameWinViewController.CreateGameWinView();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.IsWin || GameManager.Instance.IsGameOver)
+        {
+            return;
+        }
         Vector3 touchPosition;
         if (Input.GetMouseButton(0))
         {
@@ -57,7 +66,7 @@ public class Seed : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Debug.Log("can't see me");
+        //Debug.Log("can't see me");
         GameManager.Instance.GameOver();
     }
 }
