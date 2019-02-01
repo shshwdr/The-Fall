@@ -20,7 +20,7 @@ public class Seed : MonoBehaviour
             Vector3 dir = (collision.transform.position - transform.position).normalized;
             Vector3 hitPosition = transform.position;
             //Debug.Log("colli " + collision.transform.position + " self " + transform.position);
-            StartCoroutine(GenerateSprout(hitPosition));
+            StartCoroutine(GenerateSprout(hitPosition+dir*0.5f));
             GameManager.Instance.Win();
         }
     }
