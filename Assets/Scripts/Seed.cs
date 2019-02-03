@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Seed : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
+    PolygonCollider2D collider;
     public float force = 1;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<PolygonCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,6 +25,18 @@ public class Seed : MonoBehaviour
             StartCoroutine(GenerateSprout(hitPosition+dir*0.5f));
             GameManager.Instance.Win();
         }
+    }
+
+    public void RemoveCollider()
+    {
+        collider.enabled = false;
+        rb.simulated = false;
+    }
+
+    public void RecoverCollider()
+    {
+        collider.enabled = true;
+        rb.simulated = true;
     }
 
 
