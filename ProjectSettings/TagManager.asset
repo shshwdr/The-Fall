@@ -45,6 +45,12 @@ TagManager:
   - name: ground
     uniqueID: 2836818825
     locked: 0
+  - name: nest_cover
+    uniqueID: 3820823423
+    locked: 0
   - name: sprout
     uniqueID: 1759692347
+    locked: 0
+  - name: nest_bg
+    uniqueID: 109780717
     locked: 0
