@@ -15,7 +15,7 @@ public class Bird : MonoBehaviour
     float delay = 0;
     enum BirdStateEnum { wait,flyToSeed,flyToNest,pauseOnNest,flyAway}
     BirdStateEnum birdStateEnum;
-
+    GameObject nestCover;
     Seed seed;
     
     float currentTime;
@@ -26,7 +26,8 @@ public class Bird : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         birdStateEnum = BirdStateEnum.wait;
         delay = Random.Range(delayMin, delayMax);
-        Invoke("StartFly", delay);
+
+        nestCover = transform.parent.Find("nest_cover").gameObject;
     }
 
     void StartFly()
@@ -49,6 +50,9 @@ public class Bird : MonoBehaviour
             seed.transform.parent = transform;
             birdStateEnum = BirdStateEnum.flyToNest;
 
+            //hide nest cover
+            nestCover.SetActive(false);
+
             flyStartPosition = transform.position;
             target = nestStop.position;
             direction = (target - flyStartPosition).normalized;
@@ -62,6 +66,7 @@ public class Bird : MonoBehaviour
         seed.transform.parent = null;
         seed.rb.velocity = new Vector3(0, -1, 0);
         birdStateEnum = BirdStateEnum.flyAway;
+        nestCover.SetActive(true);
     }
 
     // Update is called once per frame
@@ -70,6 +75,10 @@ public class Bird : MonoBehaviour
         switch (birdStateEnum)
         {
             case BirdStateEnum.wait:
+
+                if(Seed.Instance.transform.position.y<transform.position.y - 3) { 
+                Invoke("StartFly", delay);
+                }
                 break;
             case BirdStateEnum.flyToSeed:
                 rb.MovePosition(transform.position + direction * speed * Time.deltaTime);

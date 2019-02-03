@@ -10,7 +10,8 @@ public class MovingCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Vector3 seedTrans = GameObject.Find("seed").transform.position;
+        transform.position = new Vector3(seedTrans.x, seedTrans.y,transform.position.z);
     }
 
     // Update is called once per frame

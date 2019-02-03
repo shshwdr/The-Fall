@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Seed : MonoBehaviour
+public class Seed : Singleton<Seed>
 {
     public Rigidbody2D rb;
     PolygonCollider2D collider;
