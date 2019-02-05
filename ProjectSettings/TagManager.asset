@@ -49,6 +49,9 @@ TagManager:
   - name: seed
     uniqueID: 4140817833
     locked: 0
+  - name: bird
+    uniqueID: 3221349545
+    locked: 0
   - name: nest_cover
     uniqueID: 3820823423
     locked: 0
