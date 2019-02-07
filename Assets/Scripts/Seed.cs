@@ -57,7 +57,7 @@ public class Seed : Singleton<Seed>
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.Instance.IsWin || GameManager.Instance.IsGameOver)
+        if(GameManager.Instance.IsGameEnd)
         {
             return;
         }

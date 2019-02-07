@@ -36,9 +36,13 @@ public class Star : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "seed")
+        if (GameManager.Instance.IsGameEnd)
         {
-            GameManager.Instance.GetStar();
+            return;
+        }
+        if (collision.tag == "seed")
+        {
+            GameManager.Instance.CollectStar();
             GetComponent<PolygonCollider2D>().enabled = false;
             TweenMove();
             //Vector3 starMoveTarget = Camera.main.ScreenToWorldPoint(starCollectTarget.position);

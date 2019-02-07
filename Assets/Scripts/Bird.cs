@@ -72,6 +72,10 @@ public class Bird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.IsGameEnd)
+        {
+            return;
+        }
         switch (birdStateEnum)
         {
             case BirdStateEnum.wait:
