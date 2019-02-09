@@ -19,7 +19,7 @@ public class ResultPageStar : MonoBehaviour
     
     public IEnumerator ShowStarAnim(float delay, AnimationCurve animationCurve)
     {
-        Start();
+        //Start();
         yield return new WaitForSeconds(delay);
         //Debug.Log("v1 " + TweenToControl.rectTransform.anchoredPosition + " v2 " + GetComponent<RectTransform>().anchoredPosition);
         TweenToControl.SetAnimationPosition(TweenToControl.rectTransform.anchoredPosition, Vector3.zero, animationCurve, null);

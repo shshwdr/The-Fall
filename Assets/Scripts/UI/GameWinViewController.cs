@@ -14,10 +14,10 @@ public class GameWinViewController : MonoBehaviour
     public float starAnimBegin = 0.5f;
     public float starAnimInterval = 0.5f;
 
-    private void Start()
-    {
-        Init();
-    }
+    //private void Start()
+    //{
+    //    Init();
+    //}
 
     public static void CreateGameWinView()
     {
@@ -36,7 +36,7 @@ public class GameWinViewController : MonoBehaviour
     }
     void ShowStars()
     {
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < GameManager.Instance.starNum; i++)
         {
             StartCoroutine(stars[i].ShowStarAnim(i*starAnimInterval + starAnimBegin,animationCurve));
         }

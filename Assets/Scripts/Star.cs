@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DigitalRuby.Tween;
+using TMPro;
 
 public class Star : MonoBehaviour
 {
     Transform starCollectTarget;
+    EasyTween starNumTween;
+    public float animTime = 0.6f;
     // Start is called before the first frame update
     void Start()
     {
         starCollectTarget = GameObject.Find("starCollectTarget").transform;
+        starNumTween = GameObject.Find("starNum").GetComponent<EasyTween>();
     }
 
     private void TweenMove()
@@ -30,8 +34,13 @@ public class Star : MonoBehaviour
         //currentPos.z = startPos.z = midPos.z = endPos.z = 0.0f;
 
         // completion defaults to null if not passed in
-        gameObject.Tween("MoveCircle", currentPos, starMoveTarget, 1f, TweenScaleFunctions.CubicEaseIn, updateCirclePos, circleMoveCompleted);
-            
+        gameObject.Tween("MoveCircle", currentPos, starMoveTarget, animTime, TweenScaleFunctions.CubicEaseIn, updateCirclePos, circleMoveCompleted);
+        Invoke("AnimStarNum", animTime-0.1f);
+    }
+
+    private void AnimStarNum(){
+        starNumTween.GetComponent<TextMeshProUGUI>().text = "x " + GameManager.Instance.starNum;
+        starNumTween.PlayOpenAnimations();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +62,9 @@ public class Star : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    starNumTween.PlayOpenAnimations();
+        //}
     }
 }
