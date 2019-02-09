@@ -117,6 +117,10 @@ public class EasyTween : MonoBehaviour
     private void Start()
     {
         AnimationParts.OnDisableOrDestroy += CheckTriggerEndState;
+        if (rectTransform == null)
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
     }
 
     private void OnDestroy()

@@ -10,6 +10,14 @@ public class GameWinViewController : MonoBehaviour
     public Button backToMenuButton;
 
     public ResultPageStar[] stars;
+    public AnimationCurve animationCurve;
+    public float starAnimBegin = 0.5f;
+    public float starAnimInterval = 0.5f;
+
+    private void Start()
+    {
+        Init();
+    }
 
     public static void CreateGameWinView()
     {
@@ -28,9 +36,9 @@ public class GameWinViewController : MonoBehaviour
     }
     void ShowStars()
     {
-        for(int i = 0; i < GameManager.Instance.starNum; i++)
+        for(int i = 0; i < 3; i++)
         {
-            StartCoroutine(stars[i].ShowStarAnim(i + 1));
+            StartCoroutine(stars[i].ShowStarAnim(i*starAnimInterval + starAnimBegin,animationCurve));
         }
     }
     // Update is called once per frame
