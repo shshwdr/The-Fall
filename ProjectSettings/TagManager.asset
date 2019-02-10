@@ -49,6 +49,9 @@ TagManager:
   - name: seed
     uniqueID: 4140817833
     locked: 0
+  - name: cloud
+    uniqueID: 3928722533
+    locked: 0
   - name: bird
     uniqueID: 3221349545
     locked: 0

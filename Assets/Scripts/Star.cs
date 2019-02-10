@@ -34,7 +34,7 @@ public class Star : MonoBehaviour
         //currentPos.z = startPos.z = midPos.z = endPos.z = 0.0f;
 
         // completion defaults to null if not passed in
-        gameObject.Tween("MoveCircle", currentPos, starMoveTarget, animTime, TweenScaleFunctions.CubicEaseIn, updateCirclePos, circleMoveCompleted);
+        gameObject.Tween("MoveStar", currentPos, starMoveTarget, animTime, TweenScaleFunctions.CubicEaseIn, updateCirclePos, circleMoveCompleted);
         Invoke("AnimStarNum", animTime-0.1f);
     }
 
