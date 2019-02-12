@@ -5,12 +5,13 @@ using UnityEngine;
 public class MovingCamera : MonoBehaviour
 {
     public float movingSpeed = 2;
-    public GameObject ground;
+    GameObject ground;
     bool hasSeenGround;
     // Start is called before the first frame update
     void Start()
     {
         Vector3 seedTrans = GameObject.Find("seed").transform.position;
+        ground = GameObject.FindGameObjectWithTag("ground");
         transform.position = new Vector3(seedTrans.x, seedTrans.y,transform.position.z);
     }
 
