@@ -393,6 +393,21 @@ namespace Sinbad {
                 }
                 return res;
             }
+            if (t == typeof(List<float>))
+            {
+                List<float> res = new List<float>();
+                string[] pairs = strValue.Split('|');
+                foreach (string str in pairs)
+                {
+                    //if (p.Length != 2)
+                    //{
+                    //    Debug.LogError("error when parse pair" + pair + " in string: " + strValue);
+                    //    return res;
+                    //}
+                    res.Add(float.Parse(str));
+                }
+                return res;
+            }
             if (t == typeof(List<int>))
             {
                 List<int> res = new List<int>();

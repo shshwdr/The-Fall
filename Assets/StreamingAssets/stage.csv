@@ -1,5 +1,6 @@
-identifier,name,starsToUnlock
-grassLand,GRASSLAND,0
-rain,RAINY,10
-level3,level3,20
-level4,level4,30
+identifier,name,starsToUnlock,color
+grass,GRASSLAND,0,
+rain,RAINY,10,
+rainforest,Rain Forest,20,
+night,NIGHT,30,
+winter,WINTER,40,

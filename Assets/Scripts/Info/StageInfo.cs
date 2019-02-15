@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageInfo : MonoBehaviour
+public class StageInfo
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string identifier;
+    public string name;
+    public int starsToUnlock;
+    public List<float> color;
 }
