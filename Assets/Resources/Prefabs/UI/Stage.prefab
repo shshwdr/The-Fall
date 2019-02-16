@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282580899
-  m_fontColor: {r: 0.6405404, g: 1, b: 0.25943398, a: 1}
+    rgba: 4286673240
+  m_fontColor: {r: 0.3484336, g: 0.44625375, b: 0.509434, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8489628, g: 1, b: 0.6556604, a: 0.392}
+  m_Color: {r: 0, g: 0.4716981, b: 0.0148227755, a: 0.392}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -370,5 +370,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTable: {fileID: 8964099171428335604}
-  levelCellPrefab: {fileID: 3925312664989361314, guid: 3acdce066eea1fa4293013cd3e9fb048,
-    type: 3}

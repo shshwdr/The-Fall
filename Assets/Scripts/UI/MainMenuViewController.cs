@@ -5,12 +5,12 @@ using UnityEngine;
 public class MainMenuViewController : MonoBehaviour
 {
     public Transform stageTable;
-    public GameObject stagePrefab;
+    GameObject stagePrefab;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        stagePrefab = Resources.Load<GameObject>("Prefabs/UI/Stage");
         SetupView();
     }
 

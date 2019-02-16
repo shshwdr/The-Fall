@@ -11,12 +11,13 @@ public class StageCell : MonoBehaviour
     Image bg;
 
     public Transform levelTable;
-    public GameObject levelCellPrefab;
+    GameObject levelCellPrefab;
     // Start is called before the first frame update
     public void InitWithStageInfo(StageInfo _stageInfo)
     {
         title = GetComponentInChildren<TextMeshProUGUI>();
         bg = GetComponent<Image>();
+        levelCellPrefab = Resources.Load<GameObject>("Prefabs/UI/Level");
         stageInfo = _stageInfo;
 
         SetupStageCell();
