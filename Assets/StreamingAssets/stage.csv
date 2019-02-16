@@ -1,6 +1,6 @@
-identifier,name,starsToUnlock,color
-grass,GRASSLAND,0,
-rain,RAINY,10,
-rainforest,Rain Forest,20,
-night,NIGHT,30,
-winter,WINTER,40,
+identifier,name,starsToUnlock,colorList
+grass,GRASSLAND,0,0.64|1|0.26
+rain,RAINY,10,0.2|0.6|1
+rainforest,Rain Forest,20,0.64|1|0.26
+night,NIGHT,30,0.64|1|0.26
+winter,WINTER,40,0.64|1|0.26

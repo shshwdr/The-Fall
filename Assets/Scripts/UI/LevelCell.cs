@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class LevelCell : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void InitWithLevelInfo(LevelInfo _levelInfo)
     {
-        
-    }
+        //title = GetComponentInChildren<TextMeshProUGUI>();
+        //bg = GetComponent<Image>();
+        //stageInfo = _stageInfo;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //SetupStageCell();
+        //SetupLevelTable();
     }
+    
 }
