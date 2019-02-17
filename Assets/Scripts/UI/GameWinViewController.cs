@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameWinViewController : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class GameWinViewController : MonoBehaviour
     {
         nextLevelButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
         restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
-        backToMenuButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
+        backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); });
         ShowStars();
     }
     void ShowStars()

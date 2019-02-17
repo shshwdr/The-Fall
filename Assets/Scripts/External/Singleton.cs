@@ -20,6 +20,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 {
                     GameObject go = new GameObject();
                     THE_INSTANCE = go.AddComponent<T>();
+                    go.name = typeof(T).ToString();
                     //DontDestroyOnLoad(go);
                     //CSUtil.LOG("singleton " + typeof(T) + " create");
                 }
