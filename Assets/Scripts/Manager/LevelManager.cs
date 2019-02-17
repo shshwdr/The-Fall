@@ -60,6 +60,10 @@ public class LevelManager : Singleton<LevelManager>
             {
                 levelUnlockDict[levelInfo.identifier] = true;
             }
+            else
+            {
+                levelUnlockDict[levelInfo.identifier] = false;
+            }
         }
     }
     private void Start()

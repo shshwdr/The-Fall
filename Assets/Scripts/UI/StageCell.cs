@@ -10,6 +10,13 @@ public class StageCell : MonoBehaviour
     StageInfo stageInfo;
     Image bg;
 
+    public GameObject lockImage;
+    public Color lockColor;
+    public GameObject requirementPanel;
+    public TextMeshProUGUI requirementText;
+
+    bool isUnlocked;
+
     public Transform levelTable;
     GameObject levelCellPrefab;
     // Start is called before the first frame update
@@ -20,15 +27,27 @@ public class StageCell : MonoBehaviour
         levelCellPrefab = Resources.Load<GameObject>("Prefabs/UI/Level");
         stageInfo = _stageInfo;
 
+        isUnlocked = LevelManager.Instance.stageUnlockDict[stageInfo.identifier];
+
         SetupStageCell();
         SetupLevelTable();
     }
     void SetupStageCell()
     {
-
         title.text = stageInfo.name;
-        title.color = stageInfo.color;
-        bg.color = new Color(stageInfo.color.r, stageInfo.color.g, stageInfo.color.b, bg.color.a);
+        Color stageColor = isUnlocked?stageInfo.color:lockColor;
+        title.color = stageColor;
+        bg.color = new Color(stageColor.r, stageColor.g, stageColor.b, bg.color.a);
+        lockImage.SetActive(!isUnlocked);
+        if (!isUnlocked)
+        {
+            requirementPanel.SetActive(true);
+            requirementText.text = stageInfo.starsToUnlock.ToString();
+        }
+        else
+        {
+            requirementPanel.SetActive(false);
+        }
     }
     void SetupLevelTable()
     {
@@ -36,7 +55,7 @@ public class StageCell : MonoBehaviour
         {
             GameObject stageObject = Instantiate(levelCellPrefab, levelTable);
             LevelCell levelCell = stageObject.GetComponent<LevelCell>();
-            levelCell.InitWithLevelInfo(levelInfo);
+            levelCell.InitWithLevelInfo(levelInfo, isUnlocked);
         }
     }
 
