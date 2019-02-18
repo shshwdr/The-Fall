@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         IsWin = true;
+        PersistentDataManager.Instance.RecordStar(LevelManager.Instance.currentLevelId, starNum);
     }
 
 
@@ -51,6 +52,6 @@ public class GameManager : Singleton<GameManager>
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(LevelManager.Instance.currentLevelId);
     }
 }

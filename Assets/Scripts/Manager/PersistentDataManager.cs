@@ -8,19 +8,38 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
     static string levelStarSuffix = "_star";
 
     public int totalStar { get; private set; }
-    public Dictionary<string, bool> isFinishedByLevelId;
-    Dictionary<string, int> starByLevelId;
+    public Dictionary<string, bool> isFinishedByLevelId { get; private set; }
+    public Dictionary<string, int> starByLevelId { get; private set; }
     public void Init()
     {
         DontDestroyOnLoad(gameObject);
         isFinishedByLevelId = new Dictionary<string, bool>();
         starByLevelId = new Dictionary<string, int>();
+        totalStar = 0;
         foreach (string levelIdentifier in LevelManager.Instance.levelInfoByIdentifier.Keys)
         {
-            isFinishedByLevelId[levelIdentifier] = PlayerPrefs.GetInt(levelIdentifier + levelFinishedSuffix) == 1;
-            starByLevelId[levelIdentifier] = PlayerPrefs.GetInt(levelIdentifier + levelStarSuffix);
+            LoadPersistentData(levelIdentifier);
             totalStar += starByLevelId[levelIdentifier];
         }
         LevelManager.Instance.UpdateWithPersistentData();
+    }
+    void LoadPersistentData(string levelIdentifier)
+    {
+        isFinishedByLevelId[levelIdentifier] = PlayerPrefs.GetInt(levelIdentifier + levelFinishedSuffix) == 1;
+        starByLevelId[levelIdentifier] = PlayerPrefs.GetInt(levelIdentifier + levelStarSuffix);
+    }
+    void SavePersistentData(string levelIdentifier,int starNum)
+    {
+        PlayerPrefs.SetInt(levelIdentifier + levelFinishedSuffix, 1);
+        PlayerPrefs.SetInt(levelIdentifier+levelStarSuffix, starNum);
+    }
+    public void RecordStar(string levelId, int star) {
+        if (star > starByLevelId[levelId])
+        {
+            int diff = star - starByLevelId[levelId];
+            totalStar += diff;
+            SavePersistentData(levelId, star);
+            LoadPersistentData(levelId);
+        }
     }
 }

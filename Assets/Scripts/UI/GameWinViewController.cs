@@ -30,7 +30,13 @@ public class GameWinViewController : MonoBehaviour
     
     void Init()
     {
-        nextLevelButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
+        if (LevelManager.Instance.HasNextLevel()) { 
+        nextLevelButton.onClick.AddListener(delegate { LevelManager.Instance.LoadNextLevel(); });
+        }
+        else
+        {
+            nextLevelButton.gameObject.SetActive(false);
+        }
         restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
         backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); });
         ShowStars();

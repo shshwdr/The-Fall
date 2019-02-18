@@ -33,8 +33,16 @@ public class LevelCell : MonoBehaviour
                 image.color = lockColor;
             }
         }
-        button.onClick.AddListener(delegate { SceneManager.LoadScene(levelInfo.identifier); });
+        button.onClick.AddListener(delegate { LevelManager.Instance.LoadLevel(levelInfo.identifier); });
         lockImage.SetActive(!isUnlocked && isStageUnLocked);
+        foreach(GameObject star in stars)
+        {
+            star.SetActive(false);
+        }
+        for(int i = 0;i<PersistentDataManager.Instance.starByLevelId[levelInfo.identifier];i++)
+        {
+            stars[i].SetActive(true);
+        }
     }
     
 }

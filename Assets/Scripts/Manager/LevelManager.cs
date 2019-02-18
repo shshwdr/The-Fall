@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sinbad;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -11,6 +12,8 @@ public class LevelManager : Singleton<LevelManager>
     public Dictionary<string, List<LevelInfo>> levelInfoByStageId;
     public Dictionary<string, bool> stageUnlockDict;
     public Dictionary<string, bool> levelUnlockDict;
+    public Dictionary<string, string> levelToNextLevel;
+    public string currentLevelId;
     // Start is called before the first frame update
     public void Init()
     {
@@ -22,6 +25,8 @@ public class LevelManager : Singleton<LevelManager>
         stageInfoByIdentifier = new Dictionary<string, StageInfo>();
         stageUnlockDict = new Dictionary<string, bool>();
         levelUnlockDict = new Dictionary<string, bool>();
+        levelToNextLevel = new Dictionary<string, string>();
+        string lastLevelId = null;
         foreach (StageInfo stageInfo in stageInfoList)
         {
             levelInfoByStageId[stageInfo.identifier] = new List<LevelInfo>();
@@ -37,6 +42,12 @@ public class LevelManager : Singleton<LevelManager>
 
             levelInfoByIdentifier[levelInfo.identifier] = levelInfo;
             levelInfoByStageId[levelInfo.stageIdentifier].Add(levelInfo);
+
+            if (lastLevelId != null)
+            {
+                levelToNextLevel[lastLevelId] = levelInfo.identifier;
+            }
+            lastLevelId = levelInfo.identifier;
         }
     }
     public void UpdateWithPersistentData()
@@ -66,8 +77,17 @@ public class LevelManager : Singleton<LevelManager>
             }
         }
     }
-    private void Start()
+    public void LoadLevel(string levelId)
     {
-        
+        currentLevelId = levelId;
+        SceneManager.LoadScene(levelId);
+    }
+    public bool HasNextLevel()
+    {
+        return levelToNextLevel.ContainsKey(currentLevelId);
+    }
+    public void LoadNextLevel() {
+        string nextLevelId = levelInfoByIdentifier[levelToNextLevel[currentLevelId]].identifier;
+        LoadLevel(nextLevelId);
     }
 }
