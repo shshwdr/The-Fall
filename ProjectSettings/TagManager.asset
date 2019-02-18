@@ -46,6 +46,12 @@ TagManager:
   - name: nest_bg
     uniqueID: 109780717
     locked: 0
+  - name: branch
+    uniqueID: 3913264263
+    locked: 0
+  - name: trunk
+    uniqueID: 2578687341
+    locked: 0
   - name: seed
     uniqueID: 4140817833
     locked: 0

@@ -8,7 +8,7 @@ public class ViewControllerManager : Singleton<ViewControllerManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        viewControllerCanvas = GameObject.FindObjectOfType<Canvas>().gameObject;
     }
 
     // Update is called once per frame
