@@ -18,7 +18,7 @@ namespace PathCreation.Examples
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
                 transform.rotation = pathCreator.path.GetRotationAtDistance2D(distanceTravelled, endOfPathInstruction);
-                
+                //transform.right = target.position - transform.position;
             }
         }
     }
