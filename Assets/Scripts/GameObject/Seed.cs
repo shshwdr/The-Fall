@@ -7,11 +7,24 @@ public class Seed : Singleton<Seed>
     public Rigidbody2D rb;
     PolygonCollider2D collider;
     public float force = 1;
+    public float distanceToShowHitPuff = 1f;
+    GameObject normalPuff;
+    GameObject hitPuff;
+    GameObject hitPuffObject;
+    GameObject normalPuffObject;
+    GameObject puffObject;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         collider = GetComponent<PolygonCollider2D>();
+
+        normalPuff = Resources.Load("Prefabs/normalPuff") as GameObject;
+        hitPuff = Resources.Load("Prefabs/hitPuff") as GameObject;
+        hitPuffObject = Instantiate(hitPuff, Vector3.zero, Quaternion.identity);
+        hitPuffObject.SetActive(false);
+        normalPuffObject = Instantiate(normalPuff, Vector3.zero, Quaternion.identity);
+        normalPuffObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -71,12 +84,46 @@ public class Seed : Singleton<Seed>
         }
         else
         {
+            normalPuffObject.SetActive(false);
+            hitPuffObject.SetActive(false);
             return;
         }
+        
         touchPosition = Camera.main.ScreenToWorldPoint(touchPosition);
+        Vector3 puffPosition = new Vector3(touchPosition.x, touchPosition.y, 0);
+        float distanceToTouch = Vector2.Distance(touchPosition, transform.position);
+        if (distanceToTouch > distanceToShowHitPuff)
+        {
+            if (puffObject != normalPuffObject)
+            {
+                hitPuffObject.SetActive(false);
+                normalPuffObject.GetComponentInChildren<SpriteAnim>().ResetAnim();
+            }
+            puffObject = normalPuffObject;
+        }
+        else
+        {
+            if (puffObject != hitPuffObject)
+            {
+                normalPuffObject.SetActive(false);
+                hitPuffObject.GetComponentInChildren<SpriteAnim>().ResetAnim();
+            }
+            puffObject = hitPuffObject;
+        }
+        if (!puffObject.active)
+        {
+            puffObject.GetComponentInChildren<SpriteAnim>().ResetAnim();
+        }
+            puffObject.transform.position = puffPosition;
+            Vector3 direction = (touchPosition - transform.position).normalized;
+            Quaternion rotation = Quaternion.LookRotation(direction, new Vector3(0,0,1));
+            puffObject.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+            //Debug.Log("puff rotation"+puffObject.transform.rotation);
+            puffObject.SetActive(true);
         Vector2 forceVector = (transform.position - touchPosition).normalized * force;
-        rb.AddForce(forceVector);
+        //rb.AddForce(forceVector);
     }
+
 
     private void OnBecameInvisible()
     {

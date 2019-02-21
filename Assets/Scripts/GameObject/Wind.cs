@@ -12,7 +12,7 @@ public class Wind : MonoBehaviour
 
             Debug.Log("hit seed");
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            print("forward" + transform.up);
+            //print("forward" + transform.up);
             rb.AddForce(transform.up * force,ForceMode2D.Impulse);
         }
     }

@@ -73,3 +73,6 @@ TagManager:
   - name: wind
     uniqueID: 71900067
     locked: 0
+  - name: puff
+    uniqueID: 94615567
+    locked: 0

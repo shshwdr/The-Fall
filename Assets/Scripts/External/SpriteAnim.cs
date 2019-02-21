@@ -21,6 +21,11 @@ public class SpriteAnim : MonoBehaviour
         sprites = Resources.LoadAll<Sprite>("animSprite/"+location);
     }
 
+    public void ResetAnim()
+    {
+        frame = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
