@@ -438,6 +438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1048450557}
   - component: {fileID: 1048450558}
+  - component: {fileID: 1048450559}
   m_Layer: 0
   m_Name: Lightning
   m_TagString: Untagged
@@ -484,6 +485,25 @@ MonoBehaviour:
   - {fileID: 1224999293}
   - {fileID: 1657147912}
   screenLight: {fileID: 369508281}
+--- !u!95 &1048450559
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048450556}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f66a18417e8503d42b22812029097468, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1224999293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,7 +1148,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0, a: 0.20784314}
-      key1: {r: 1, g: 0, b: 0, a: 0.22745098}
+      key1: {r: 1, g: 0, b: 0, a: 0.20784314}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
