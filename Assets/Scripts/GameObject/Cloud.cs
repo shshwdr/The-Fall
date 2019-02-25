@@ -51,7 +51,11 @@ public class Cloud : MonoBehaviour
     {
         System.Action<ITween<Vector3>> updateCirclePos = (t) =>
         {
-            transform.position = t.CurrentValue;
+            if(this != null)
+            {
+
+                transform.position = t.CurrentValue;
+            }
             //GetComponent<Tran>().MovePosition(t.CurrentValue);
         };
 

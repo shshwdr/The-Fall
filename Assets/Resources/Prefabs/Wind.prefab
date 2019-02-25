@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathCreator: {fileID: 0}
+  pathCreator: {fileID: 7028048755070743196}
   endOfPathInstruction: 2
   speed: 4
 --- !u!114 &4158157815130025207

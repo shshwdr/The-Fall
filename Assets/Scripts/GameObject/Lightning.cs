@@ -48,7 +48,7 @@ public class Lightning : MonoBehaviour
 
         Camera camera = Camera.main;
         float halfHeight = camera.orthographicSize;
-        extendScreenHeight = halfHeight * 2 * 1.1f;
+        extendScreenHeight = halfHeight * 2 * 1.3f;
         
         endPoint.position = new Vector3(endPoint.position.x, startPoint.position.y - extendScreenHeight, endPoint.position.z);
        
@@ -68,6 +68,7 @@ public class Lightning : MonoBehaviour
         {
 
             bolt.StartPosition = startPoint.position;
+            bolt.EndPosition = startPoint.position;
         }
         UpdateEndPosition();
         //StartCoroutine(StartActivity());
@@ -75,17 +76,12 @@ public class Lightning : MonoBehaviour
 
     void UpdateEndPosition()
     {
-
         light.SetPosition(1, endPoint.position);
         selfCollider = GetComponentInChildren<BoxCollider2D>();
         selfCollider.transform.position = (startPoint.position + endPoint.position) / 2;
         selfCollider.transform.right = endPoint.position - startPoint.position;
         selfCollider.size = new Vector2((endPoint.position - startPoint.position).magnitude, 0.5f);
-        foreach (LightningBoltScript bolt in lightningBolt)
-        {
-            
-            bolt.EndPosition = endPoint.position;
-        }
+
     }
     
     bool CanGenerateLight()
@@ -173,10 +169,11 @@ public class Lightning : MonoBehaviour
             case LightningState.showLightning:
                 if (countTime < lightningBoltMoveTime)
                 {
+                    Debug.Log("show light " + endPoint.position);
                     foreach (LightningBoltScript bolt in lightningBolt)
                     {
-                        bolt.gameObject.SetActive(true);
                         bolt.EndPosition = Vector3.Lerp(startPoint.position, endPoint.position, countTime / lightningBoltMoveTime);
+                        bolt.gameObject.SetActive(true);
                     }
                 }
                 else

@@ -61,6 +61,9 @@ TagManager:
   - name: nest_cover
     uniqueID: 3820823423
     locked: 0
+  - name: lightning
+    uniqueID: 3947055103
+    locked: 0
   - name: ground
     uniqueID: 2836818825
     locked: 0
