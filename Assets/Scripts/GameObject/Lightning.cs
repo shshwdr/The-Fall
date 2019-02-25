@@ -80,7 +80,7 @@ public class Lightning : MonoBehaviour
         selfCollider = GetComponentInChildren<BoxCollider2D>();
         selfCollider.transform.position = (startPoint.position + endPoint.position) / 2;
         selfCollider.transform.right = endPoint.position - startPoint.position;
-        selfCollider.size = new Vector2((endPoint.position - startPoint.position).magnitude, 1);
+        selfCollider.size = new Vector2((endPoint.position - startPoint.position).magnitude, 0.5f);
         foreach (LightningBoltScript bolt in lightningBolt)
         {
             

@@ -3,10 +3,10 @@ level1,level1,grass,,level1
 level2,level2,grass,level1,level2
 level3,level3,grass,level2,level3
 level4,level4,grass,level3,level4
-level5,level5,rain,,level1
-level6,level6,rain,level5,level2
-level7,level7,rain,level6,level3
-level8,level8,rain,level7,level4
+level5,level5,rain,,level5
+level6,level6,rain,level5,level6
+level7,level7,rain,level6,level7
+level8,level8,rain,level7,level8
 level9,level9,rainforest,,level1
 level10,level10,rainforest,level9,level2
 level11,level11,rainforest,level10,level3
