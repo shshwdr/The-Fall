@@ -72,6 +72,8 @@ public class Seed : Singleton<Seed>
     {
         if(GameManager.Instance.IsGameEnd)
         {
+            hitPuffObject.SetActive(false);
+            normalPuffObject.SetActive(false);
             return;
         }
         Vector3 touchPosition;
@@ -121,7 +123,13 @@ public class Seed : Singleton<Seed>
             //Debug.Log("puff rotation"+puffObject.transform.rotation);
             puffObject.SetActive(true);
         Vector2 forceVector = (transform.position - touchPosition).normalized * force;
-        //rb.AddForce(forceVector);
+        rb.AddForce(forceVector);
+    }
+
+    public void HitByLightning()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(0.2f, 0.2f, 0.2f, 1);
+        GameManager.Instance.GameOver();
     }
 
 

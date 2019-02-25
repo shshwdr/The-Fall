@@ -18,7 +18,7 @@ public class Lightning : MonoBehaviour
     float countTime;
 
     float lightFadeInTime = 0.2f;
-    float lightStayTime = 0.5f;
+    float lightStayTime = 1f;
     float lightFadeOutTime = 0.5f;
     
     float lightningBoltMoveTime = 0.5f;
@@ -31,6 +31,9 @@ public class Lightning : MonoBehaviour
     Color screenLightFullColor;
 
     Vector3 midPosition;
+
+    Collider2D seedCollider;
+    BoxCollider2D selfCollider;
 
     enum LightningState { inactive,showLight,fadeoutLight,showLightning,screenLight,end};
     LightningState state;
@@ -52,6 +55,13 @@ public class Lightning : MonoBehaviour
         lightFadeoutColor  = new Color(light.startColor.r, light.startColor.g, light.startColor.b, 0);
         screenLightFullColor = screenLight.GetComponent<SpriteRenderer>().color;
         screenLightFadeOutColor = new Color(screenLightFullColor.r, screenLightFullColor.g, screenLightFullColor.b, 0);
+
+        selfCollider = GetComponentInChildren<BoxCollider2D>();
+        selfCollider.transform.position = (startPoint.position+endPoint.position)/ 2;
+        selfCollider.transform.right = endPoint.position - startPoint.position;
+        selfCollider.size = new Vector2((endPoint.position - startPoint.position).magnitude,1);
+        seedCollider = GameObject.Find("seed").GetComponent<Collider2D>();
+
 
         foreach (LightningBoltScript bolt in lightningBolt)
         {
@@ -80,7 +90,7 @@ public class Lightning : MonoBehaviour
         //    StartCoroutine(StartActivity());
         //}
 
-        Debug.Log(state);
+        //Debug.Log(state);
         countTime += Time.deltaTime;
         switch (state)
         {
@@ -143,6 +153,7 @@ public class Lightning : MonoBehaviour
                 }
                 break;
             case LightningState.screenLight:
+                CheckCollide();
                 if (countTime < screenLightFadeOutTime+screenLightStayTime && countTime>=screenLightStayTime)
                 {
                     screenLight.GetComponent<SpriteRenderer>().color = Color.Lerp(screenLightFullColor, screenLightFadeOutColor, countTime / screenLightFadeOutTime);
@@ -160,6 +171,17 @@ public class Lightning : MonoBehaviour
                 break;
             case LightningState.end:
                 break;
+        }
+    }
+    void CheckCollide()
+    {
+        if (!GameManager.Instance.IsGameEnd)
+        {
+            if (selfCollider.IsTouching(seedCollider))
+            {
+                //Debug.Log("touch!");
+                seedCollider.GetComponent<Seed>().HitByLightning();
+            }
         }
     }
 }
