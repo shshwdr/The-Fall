@@ -11,6 +11,7 @@ public class Lightning : MonoBehaviour
     public LightningBoltScript[] lightningBolt;
     LineRenderer[] lightningBoltRender;
     public GameObject screenLight;
+    public bool followSeed = true;
 
     Color lightFadeoutColor;
     Color lightFullColor;
@@ -35,6 +36,8 @@ public class Lightning : MonoBehaviour
     Collider2D seedCollider;
     BoxCollider2D selfCollider;
 
+    float extendScreenHeight;
+
     enum LightningState { inactive,showLight,fadeoutLight,showLightning,screenLight,end};
     LightningState state;
     // Start is called before the first frame update
@@ -45,21 +48,19 @@ public class Lightning : MonoBehaviour
 
         Camera camera = Camera.main;
         float halfHeight = camera.orthographicSize;
-        float halfWidth = camera.aspect * halfHeight;
-        endPoint.position = new Vector3(endPoint.position.x, startPoint.position.y - (halfHeight * 2*1.1f), endPoint.position.z);
+        extendScreenHeight = halfHeight * 2 * 1.1f;
+        
+        endPoint.position = new Vector3(endPoint.position.x, startPoint.position.y - extendScreenHeight, endPoint.position.z);
+       
         midPosition = (startPoint.position + endPoint.position) / 2;
 
         light.SetPosition(0, startPoint.position);
-        light.SetPosition(1, endPoint.position);
         lightFullColor = light.startColor;
         lightFadeoutColor  = new Color(light.startColor.r, light.startColor.g, light.startColor.b, 0);
         screenLightFullColor = screenLight.GetComponent<SpriteRenderer>().color;
         screenLightFadeOutColor = new Color(screenLightFullColor.r, screenLightFullColor.g, screenLightFullColor.b, 0);
 
-        selfCollider = GetComponentInChildren<BoxCollider2D>();
-        selfCollider.transform.position = (startPoint.position+endPoint.position)/ 2;
-        selfCollider.transform.right = endPoint.position - startPoint.position;
-        selfCollider.size = new Vector2((endPoint.position - startPoint.position).magnitude,1);
+        
         seedCollider = GameObject.Find("seed").GetComponent<Collider2D>();
 
 
@@ -67,19 +68,44 @@ public class Lightning : MonoBehaviour
         {
 
             bolt.StartPosition = startPoint.position;
-            bolt.EndPosition = endPoint.position;
         }
-
+        UpdateEndPosition();
         //StartCoroutine(StartActivity());
     }
 
-    IEnumerator StartActivity()
+    void UpdateEndPosition()
     {
-        yield return new WaitForSeconds(1);
-        state = LightningState.showLight;
-        countTime = 0;
-    }
 
+        light.SetPosition(1, endPoint.position);
+        selfCollider = GetComponentInChildren<BoxCollider2D>();
+        selfCollider.transform.position = (startPoint.position + endPoint.position) / 2;
+        selfCollider.transform.right = endPoint.position - startPoint.position;
+        selfCollider.size = new Vector2((endPoint.position - startPoint.position).magnitude, 1);
+        foreach (LightningBoltScript bolt in lightningBolt)
+        {
+            
+            bolt.EndPosition = endPoint.position;
+        }
+    }
+    
+    bool CanGenerateLight()
+    {
+
+        if (followSeed)
+        {
+            Vector3 seedPosition = GameObject.Find("seed").transform.position;
+            //Debug.Log("before generate" + seedPosition + " " + startPoint.position+" "+endPoint.position);
+            if (seedPosition.y >= startPoint.position.y || Mathf.Approximately(seedPosition.y, startPoint.position.y))
+            {
+                return false;
+            }
+            float x = (seedPosition.x - startPoint.position.x) * -extendScreenHeight / (seedPosition.y - startPoint.position.y) + startPoint.position.x;
+            endPoint.position = new Vector3(x, startPoint.position.y - extendScreenHeight, endPoint.position.z);
+            UpdateEndPosition();
+            //Debug.Log("generate light" + seedPosition + " " + endPoint.position);
+        }
+        return true;
+    }
 
 
     // Update is called once per frame
@@ -107,9 +133,17 @@ public class Lightning : MonoBehaviour
 
                 if (Camera.main.transform.position.y < midPosition.y)
                 {
-                    Debug.Log("pass middle" + midPosition.y + " " + Camera.main.transform.position.y);
-                    state = LightningState.showLight;
-                    countTime = 0;
+                    if (CanGenerateLight())
+                    {
+
+                        state = LightningState.showLight;
+                        countTime = 0;
+                    }
+                    else
+                    {
+                        state = LightningState.end;
+                    }
+                    //Debug.Log("pass middle" + midPosition.y + " " + Camera.main.transform.position.y);
                 }
                 break;
             case LightningState.showLight:
