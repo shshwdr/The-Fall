@@ -30,6 +30,9 @@ public class GameWinViewController : MonoBehaviour
     
     void Init()
     {
+        backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); });
+        restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
+        ShowStars();
         if (LevelManager.Instance.HasNextLevel()) { 
         nextLevelButton.onClick.AddListener(delegate { LevelManager.Instance.LoadNextLevel(); });
         }
@@ -37,9 +40,6 @@ public class GameWinViewController : MonoBehaviour
         {
             nextLevelButton.gameObject.SetActive(false);
         }
-        restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
-        backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); });
-        ShowStars();
     }
     void ShowStars()
     {
