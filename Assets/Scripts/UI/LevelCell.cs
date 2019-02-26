@@ -32,6 +32,7 @@ public class LevelCell : MonoBehaviour
             {
                 image.color = lockColor;
             }
+            button.interactable = false;
         }
         button.onClick.AddListener(delegate { LevelManager.Instance.LoadLevel(levelInfo.identifier); });
         lockImage.SetActive(!isUnlocked && isStageUnLocked);
