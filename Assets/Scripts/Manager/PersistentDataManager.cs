@@ -42,4 +42,11 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
             LoadPersistentData(levelId);
         }
     }
+    public void UnlockAll()
+    {
+        foreach (string levelIdentifier in LevelManager.Instance.levelInfoByIdentifier.Keys)
+        {
+            SavePersistentData(levelIdentifier, 3);
+        }
+    }
 }
