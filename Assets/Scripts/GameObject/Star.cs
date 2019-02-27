@@ -20,13 +20,20 @@ public class Star : MonoBehaviour
     {
         System.Action<ITween<Vector3>> updateCirclePos = (t) =>
         {
-            GetComponent<Rigidbody2D>().MovePosition(t.CurrentValue);
+            if (this != null)
+            {
+
+                GetComponent<Rigidbody2D>().MovePosition(t.CurrentValue);
+            }
         };
 
         System.Action<ITween<Vector3>> circleMoveCompleted = (t) =>
         {
-            Debug.Log("star move completed");
-            Destroy(gameObject);
+            if (this != null)
+            {
+                //Debug.Log("star move completed");
+                Destroy(gameObject);
+            }
         };
 
         Vector3 currentPos = transform.position;

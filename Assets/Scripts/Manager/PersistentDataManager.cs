@@ -34,12 +34,17 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
         PlayerPrefs.SetInt(levelIdentifier+levelStarSuffix, starNum);
     }
     public void RecordStar(string levelId, int star) {
+        if (!starByLevelId.ContainsKey(levelId))
+        {
+            Debug.Log(starByLevelId + " does not contain " + levelId);
+        }
         if (star > starByLevelId[levelId])
         {
             int diff = star - starByLevelId[levelId];
             totalStar += diff;
             SavePersistentData(levelId, star);
             LoadPersistentData(levelId);
+            LevelManager.Instance.UpdateWithPersistentData();
         }
     }
     public void UnlockAll()

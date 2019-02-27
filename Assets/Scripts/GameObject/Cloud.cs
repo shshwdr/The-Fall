@@ -61,7 +61,10 @@ public class Cloud : MonoBehaviour
 
         System.Action<ITween<Vector3>> circleMoveCompleted = (t) =>
         {
-            TweenMove();
+            if (this != null)
+            {
+                TweenMove();
+            }
         };
 
         Vector3 startPos = patrols[0].position;

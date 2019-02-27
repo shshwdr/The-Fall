@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Seed : Singleton<Seed>
 {
@@ -74,6 +75,11 @@ public class Seed : Singleton<Seed>
         {
             hitPuffObject.SetActive(false);
             normalPuffObject.SetActive(false);
+            return;
+        }
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
             return;
         }
         Vector3 touchPosition;

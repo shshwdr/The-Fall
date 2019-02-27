@@ -11,11 +11,13 @@ public class GameEndViewController : MonoBehaviour
     public Button restartButton;
     public Button backToMenuButton;
     public TextMeshProUGUI resultText;
+    public Button resumeButton;
 
     public ResultPageStar[] stars;
     public AnimationCurve animationCurve;
     public float starAnimBegin = 0.5f;
     public float starAnimInterval = 0.5f;
+    bool isPause;
 
     //private void Start()
     //{
@@ -37,18 +39,41 @@ public class GameEndViewController : MonoBehaviour
         script.Init(false);
     }
 
+    public static void CreatePauseView()
+    {
+        Time.timeScale = 0;
+        GameObject prefab = Resources.Load("Prefabs/UI/GameEnd", typeof(GameObject)) as GameObject;
+        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
+        GameEndViewController script = go.GetComponent<GameEndViewController>();
+
+        script.isPause = true;
+        script.Init(false);
+    }
+
     void Init(bool win)
     {
-        backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); });
-        restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
+        backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); Time.timeScale = 1; });
+        restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); Time.timeScale = 1; });
+        if (isPause)
+        {
+            foreach(ResultPageStar star in stars)
+            {
+                star.gameObject.SetActive(false);
+            }
+            resumeButton.onClick.AddListener(delegate { Destroy(gameObject); Time.timeScale = 1; });
+        }
+        else
+        {
+            resumeButton.interactable = false;
+        }
         if (win)
         {
 
             ShowStars();
         }
-        resultText.text = win ? "Succeed" : "failed";
+        resultText.text = isPause? "Resume" :(win ? "Succeed" : "failed");
         if (LevelManager.Instance.NextLevelUnklocked()) { 
-        nextLevelButton.onClick.AddListener(delegate { LevelManager.Instance.LoadNextLevel(); });
+            nextLevelButton.onClick.AddListener(delegate { LevelManager.Instance.LoadNextLevel(); Time.timeScale = 1; });
         }
         else
         {
