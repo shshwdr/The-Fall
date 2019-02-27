@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         {
             return;
         }
-        GameOverViewController.CreateGameOverView();
+        GameEndViewController.CreateGameFailedView();
         IsGameOver = true;
     }
 

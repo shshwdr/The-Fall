@@ -86,6 +86,10 @@ public class LevelManager : Singleton<LevelManager>
     {
         return levelToNextLevel.ContainsKey(currentLevelId);
     }
+    public bool NextLevelUnklocked()
+    {
+        return levelToNextLevel!=null && levelToNextLevel.ContainsKey(currentLevelId) && levelUnlockDict[currentLevelId];
+    }
     public void LoadNextLevel() {
         string nextLevelId = levelInfoByIdentifier[levelToNextLevel[currentLevelId]].identifier;
         LoadLevel(nextLevelId);

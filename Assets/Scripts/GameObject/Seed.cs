@@ -64,7 +64,7 @@ public class Seed : Singleton<Seed>
     IEnumerator ShowWinScreen()
     {
         yield return new WaitForSeconds(1f);
-        GameWinViewController.CreateGameWinView();
+        GameEndViewController.CreateGameWinView();
     }
 
     // Update is called once per frame

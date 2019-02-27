@@ -91,6 +91,7 @@ MonoBehaviour:
   nextLevelButton: {fileID: 5770613449969640474}
   restartButton: {fileID: 5770613449861900929}
   backToMenuButton: {fileID: 5770613450167383839}
+  resultText: {fileID: 5770613449608965335}
   stars:
   - {fileID: 5770613449231859690}
   - {fileID: 5770613449601524495}
@@ -635,7 +636,7 @@ GameObject:
   - component: {fileID: 5770613449608965334}
   - component: {fileID: 5770613449608965335}
   m_Layer: 5
-  m_Name: static title
+  m_Name: result text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -717,7 +718,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 68.45
+  m_fontSize: 123.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

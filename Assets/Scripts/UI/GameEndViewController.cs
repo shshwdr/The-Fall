@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
-public class GameWinViewController : MonoBehaviour
+public class GameEndViewController : MonoBehaviour
 {
     public Button nextLevelButton;
     public Button restartButton;
     public Button backToMenuButton;
+    public TextMeshProUGUI resultText;
 
     public ResultPageStar[] stars;
     public AnimationCurve animationCurve;
@@ -22,18 +24,30 @@ public class GameWinViewController : MonoBehaviour
 
     public static void CreateGameWinView()
     {
-        GameObject prefab = Resources.Load("Prefabs/UI/GameWin", typeof(GameObject)) as GameObject;
+        GameObject prefab = Resources.Load("Prefabs/UI/GameEnd", typeof(GameObject)) as GameObject;
         GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
-        GameWinViewController script = go.GetComponent<GameWinViewController>();
-        script.Init();
+        GameEndViewController script = go.GetComponent<GameEndViewController>();
+        script.Init(true);
     }
-    
-    void Init()
+    public static void CreateGameFailedView()
+    {
+        GameObject prefab = Resources.Load("Prefabs/UI/GameEnd", typeof(GameObject)) as GameObject;
+        GameObject go = Instantiate(prefab, ViewControllerManager.Instance.viewControllerCanvas.transform) as GameObject;
+        GameEndViewController script = go.GetComponent<GameEndViewController>();
+        script.Init(false);
+    }
+
+    void Init(bool win)
     {
         backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); });
         restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); });
-        ShowStars();
-        if (LevelManager.Instance.HasNextLevel()) { 
+        if (win)
+        {
+
+            ShowStars();
+        }
+        resultText.text = win ? "Succeed" : "failed";
+        if (LevelManager.Instance.NextLevelUnklocked()) { 
         nextLevelButton.onClick.AddListener(delegate { LevelManager.Instance.LoadNextLevel(); });
         }
         else
