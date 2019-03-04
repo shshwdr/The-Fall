@@ -3,49 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using DigitalRuby.Tween;
 
-public class Cloud : MonoBehaviour
+public class PatrolObject: MonoBehaviour
 {
     public float movingTime = 5f;
     public Transform[] patrols;
-    public float slowDownRate = 1.5f;
-    public float immediateFallChange = 2f;
-    public float immediateJumpChange = 3f;
     // Start is called before the first frame update
     void Start()
     {
         transform.position = patrols[0].position;
         TweenMove();
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "seed")
-        {
-            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector3(0, rb.velocity.y * immediateJumpChange, 0);
-            rb.angularDrag = 0.05f;
-            rb.transform.parent = null;
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "seed")
-        {
-            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector3(0, rb.velocity.y / immediateFallChange, 0);
-            rb.transform.parent = transform;
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "seed")
-        {
-            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector3(0, rb.velocity.y / slowDownRate, 0);
-            rb.angularDrag = 0.5f;
-        }
-    }
+    
 
     private void TweenMove()
     {

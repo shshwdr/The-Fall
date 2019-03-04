@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5849330694346403896}
   - component: {fileID: 5849330694346403898}
   - component: {fileID: 5849330694346403901}
+  - component: {fileID: 3531440064092889521}
   m_Layer: 0
   m_Name: cloud_1
   m_TagString: Untagged
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -366244763
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 4baa3dc980f65094e9253c610e9c1572, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -169,6 +170,23 @@ PolygonCollider2D:
       - {x: 0.17999999, y: -0.325}
       - {x: 0.45, y: -0.295}
       - {x: 0.68, y: -0.155}
+--- !u!114 &3531440064092889521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5849330694346403894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e9d1ab3cece4846bf71651a23575b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowDownRate: 1.5
+  immediateFallChange: 2
+  immediateJumpChange: 3
+  angularDrag: 0.5
+  attachSeedOnIt: 1
 --- !u!1 &5849330694903982478
 GameObject:
   m_ObjectHideFlags: 0

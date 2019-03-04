@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1073617751
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a91ca5abab36ed04e8e4afd919b4836e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -564,8 +564,8 @@ GameObject:
   - component: {fileID: 7489532415511279008}
   - component: {fileID: 7489532415511279009}
   - component: {fileID: 7489532415511279006}
-  - component: {fileID: 7489532415511279007}
   - component: {fileID: 7489532415511279004}
+  - component: {fileID: 4006488882774391855}
   m_Layer: 0
   m_Name: nest_cover
   m_TagString: Untagged
@@ -622,7 +622,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -474143873
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb15f357dd4a92540ab90fa0f453be16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -745,21 +745,6 @@ PolygonCollider2D:
       - {x: 0.76, y: -0.685}
       - {x: 0.72999996, y: -0.675}
       - {x: 0.71, y: -0.695}
---- !u!114 &7489532415511279007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7489532415511279011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8327256da8162d438fd91eaf7f80505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slowDownRate: 1.2
-  immediateFallChange: 2
-  immediateJumpChange: 3
 --- !u!50 &7489532415511279004
 Rigidbody2D:
   serializedVersion: 4
@@ -781,3 +766,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4006488882774391855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489532415511279011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e9d1ab3cece4846bf71651a23575b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowDownRate: 1.2
+  immediateFallChange: 2
+  immediateJumpChange: 3
+  angularDrag: 0.5
+  attachSeedOnIt: 0

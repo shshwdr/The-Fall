@@ -14,6 +14,9 @@ public class Seed : Singleton<Seed>
     GameObject hitPuffObject;
     GameObject normalPuffObject;
     GameObject puffObject;
+    
+    public float lengthStartScale = 2f;
+    public float minHitPuffLength = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,7 +72,7 @@ public class Seed : Singleton<Seed>
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate ()
     {
         if(GameManager.Instance.IsGameEnd)
         {
@@ -107,6 +110,12 @@ public class Seed : Singleton<Seed>
                 hitPuffObject.SetActive(false);
                 normalPuffObject.GetComponentInChildren<SpriteAnim>().ResetAnim();
             }
+            if(distanceToTouch< lengthStartScale)
+            {
+                Vector3 scale = normalPuffObject.transform.localScale;
+                scale.y = distanceToTouch / lengthStartScale;
+                normalPuffObject.transform.localScale = scale;
+            }
             puffObject = normalPuffObject;
         }
         else
@@ -116,6 +125,13 @@ public class Seed : Singleton<Seed>
                 normalPuffObject.SetActive(false);
                 hitPuffObject.GetComponentInChildren<SpriteAnim>().ResetAnim();
             }
+                Vector3 scale = hitPuffObject.transform.localScale;
+                scale.y = distanceToTouch / distanceToShowHitPuff;
+            scale.y = Mathf.Max(scale.y, minHitPuffLength);
+            scale.x = Mathf.Min(1.8f, 1 / scale.y);
+            hitPuffObject.transform.localScale = scale;
+
+
             puffObject = hitPuffObject;
         }
         if (!puffObject.active)

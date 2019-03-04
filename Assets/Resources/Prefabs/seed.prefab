@@ -211,4 +211,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   force: 15
-  distanceToShowHitPuff: 1
+  distanceToShowHitPuff: 1.5
