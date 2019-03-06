@@ -6,12 +6,14 @@ public class SpriteAnim : MonoBehaviour
 {
     public bool loop;
     public float frameSeconds = 1;
+    public float duration = 0;
     //The file location of the sprites within the resources folder
     public string location;
     private SpriteRenderer spr;
     Sprite[] sprites;
     private int frame = 0;
     private float deltaTime = 0;
+    public bool isFliped;
 
     // Use this for initialization
     void Start()
@@ -19,11 +21,21 @@ public class SpriteAnim : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         
         sprites = Resources.LoadAll<Sprite>("animSprite/"+location);
+        if (duration > 0)
+        {
+            frameSeconds = duration / sprites.Length;
+        }
     }
 
     public void ResetAnim()
     {
         frame = 0;
+    }
+
+    public void FlipAnim()
+    {
+        isFliped = !isFliped;
+        transform.localScale = new Vector3(transform.localScale.x*-1, transform.localScale.y, transform.localScale.z);
     }
 
     // Update is called once per frame
