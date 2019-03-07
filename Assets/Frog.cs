@@ -63,6 +63,7 @@ public class Frog : MonoBehaviour
     {
         if (collision.tag == "seed")
         {
+            //Debug.Log("hit on seed!");
             GameManager.Instance.GameOver();
         }
     }
