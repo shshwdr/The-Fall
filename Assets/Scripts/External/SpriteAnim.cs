@@ -6,30 +6,57 @@ public class SpriteAnim : MonoBehaviour
 {
     public bool loop;
     public float frameSeconds = 1;
-    public float duration = 0;
     //The file location of the sprites within the resources folder
     public string location;
     private SpriteRenderer spr;
     Sprite[] sprites;
+    public int spriteNum
+    {
+        get { return sprites.Length; }
+    }
     private int frame = 0;
     private float deltaTime = 0;
     public bool isFliped;
-
+    bool finishedInit;
+    bool isPaused;
+    public bool initByOthers;
     // Use this for initialization
-    void Start()
+
+    private void Start()
+    {
+        if (!initByOthers) {
+        spr = GetComponent<SpriteRenderer>();
+
+        sprites = Resources.LoadAll<Sprite>("animSprite/" + location);
+        finishedInit = true;
+        }
+    }
+    public void Init()
     {
         spr = GetComponent<SpriteRenderer>();
         
         sprites = Resources.LoadAll<Sprite>("animSprite/"+location);
-        if (duration > 0)
-        {
-            frameSeconds = duration / sprites.Length;
-        }
+        finishedInit = true;
+        isPaused = true;
     }
 
     public void ResetAnim()
     {
         frame = 0;
+    }
+
+    public void Pause()
+    {
+        ResetAnim();
+        spr.sprite = sprites[frame];
+        FlipAnim();
+        isPaused = true;
+    }
+
+    public void Resume()
+    {
+        ResetAnim();
+        isPaused = false;
     }
 
     public void FlipAnim()
@@ -41,6 +68,14 @@ public class SpriteAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!finishedInit)
+        {
+            return;
+        }
+        if (isPaused)
+        {
+            return;
+        }
         //Keep track of the time that has passed
         deltaTime += Time.deltaTime;
 

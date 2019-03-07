@@ -11,52 +11,36 @@ namespace PathCreation.Examples
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
-        public float duration = 0;
         float distanceTravelled;
+
+        bool isPaused;
 
 
         private void Start()
         {
-            if (duration != 0)
-            {
-                speed = pathCreator.path.length / duration;
-            }
+            transform.position = pathCreator.path.GetPointAtDistance(0, endOfPathInstruction);
+        }
+
+        public void Pause()
+        {
+            isPaused = true;
+        }
+
+        public void Resume(bool isFlipped)
+        {
+            distanceTravelled = isFlipped ? pathCreator.path.length: 0;
+            isPaused = false;
         }
 
         void Update()
         {
+            if (isPaused)
+            {
+                return;
+            }
             if (pathCreator != null)
             {
                 distanceTravelled += speed * Time.deltaTime;
-                SpriteAnim sa = GetComponentInChildren<SpriteAnim>();
-                if (sa != null)
-                {
-                    float distanceForAnim = distanceTravelled;
-                    float positionWithOneJump = Mathf.Repeat(distanceForAnim, pathCreator.path.length);
-                    if (Mathf.Abs(positionWithOneJump)<=0.1f)
-                    {
-
-                        float positionWithTwoJumps = Mathf.Repeat(distanceForAnim, pathCreator.path.length * 2);
-                        //at left, should not flip
-                        if (Mathf.Abs(positionWithTwoJumps) <= 0.1f)
-                        {
-                            if (sa.isFliped)
-                            {
-                                sa.FlipAnim();
-                                sa.ResetAnim();
-                            }
-                        }
-                        else
-                        {
-                            if (!sa.isFliped)
-                            {
-                                sa.FlipAnim();
-                                sa.ResetAnim();
-                            }
-                        }
-                    }
-                }
-
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
                 if (applyRotation)
                 {

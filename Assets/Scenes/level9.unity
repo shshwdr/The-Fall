@@ -224,20 +224,20 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -1.3705231, y: 1.5576475, z: 0}
-      - {x: -1.9929811, y: 4.427871, z: 0}
-      - {x: 2.1519413, y: 3.7016702, z: 0}
-      - {x: 1.6678071, y: 1.5576475, z: 0}
+      - {x: -1.3705231, y: 1.2182481, z: 0}
+      - {x: -1.9929811, y: 4.088472, z: 0}
+      - {x: 2.1519413, y: 3.3137965, z: 0}
+      - {x: 1.6678071, y: 1.1697738, z: 0}
       isClosed: 0
       localPosition: {x: 0, y: 0, z: 0}
       space: 1
       controlMode: 0
       autoControlLength: 0.3
       boundsUpToDate: 1
-      pivot: {x: 0.13643205, y: 2.502698, z: 0}
+      pivot: {x: 0.13643205, y: 2.1283212, z: 0}
       bounds:
-        m_Center: {x: 0.13643205, y: 2.502698, z: 0}
-        m_Extent: {x: 1.570814, y: 0.9450506, z: 0}
+        m_Center: {x: 0.13643205, y: 2.1283212, z: 0}
+        m_Extent: {x: 1.570814, y: 0.9585475, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       perAnchorNormalsAngle:
@@ -935,6 +935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4767562078937263239}
   - component: {fileID: 4767562078937263259}
+  - component: {fileID: 4767562078937263260}
   m_Layer: 0
   m_Name: frog
   m_TagString: Untagged
@@ -949,7 +950,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4767562078937263258}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
   m_Name: 
@@ -958,7 +959,20 @@ MonoBehaviour:
   pathCreator: {fileID: 635479194}
   endOfPathInstruction: 1
   speed: 5
-  duration: 5
+--- !u!114 &4767562078937263260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767562078937263258}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51e4840a3e37224e94727e74d1ab07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1
+  jumpTime: 1.5
 --- !u!1001 &5769103859077318292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1311,6 +1325,9 @@ GameObject:
   - component: {fileID: 8463415274441311418}
   - component: {fileID: 8463415274441311417}
   - component: {fileID: 8463415274441311416}
+  - component: {fileID: 8463415274441311400}
+  - component: {fileID: 8463415274441311402}
+  - component: {fileID: 8463415274441311401}
   m_Layer: 0
   m_Name: frog
   m_TagString: Untagged
@@ -1318,6 +1335,52 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!58 &8463415274441311400
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463415274441311399}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.13, y: 0.26}
+  serializedVersion: 2
+  m_Radius: 0.05
+--- !u!114 &8463415274441311401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463415274441311399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51e4840a3e37224e94727e74d1ab07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1
+  jumpTime: 1.5
+--- !u!114 &8463415274441311402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8463415274441311399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyRotation: 0
+  pathCreator: {fileID: 635479194}
+  endOfPathInstruction: 1
+  speed: 5
 --- !u!114 &8463415274441311416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,9 +1395,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loop: 1
   frameSeconds: 0.15
-  duration: 5
   location: frog
   isFliped: 0
+  initByOthers: 1
 --- !u!212 &8463415274441311417
 SpriteRenderer:
   m_ObjectHideFlags: 0
