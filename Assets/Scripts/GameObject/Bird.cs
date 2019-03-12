@@ -8,6 +8,7 @@ public class Bird : MonoBehaviour
     public float delayMax = 1;
     public float speed = 3;
     public Transform nestStop;
+    public float birdFlyTriggerHeight = 3;
     Vector3 direction;
     Vector3 flyStartPosition;
     Vector3 target;
@@ -79,9 +80,8 @@ public class Bird : MonoBehaviour
         switch (birdStateEnum)
         {
             case BirdStateEnum.wait:
-
-                if(Seed.Instance.transform.position.y<transform.position.y - 3) { 
-                Invoke("StartFly", delay);
+                if(Seed.Instance.transform.position.y<transform.position.y - birdFlyTriggerHeight) { 
+                    Invoke("StartFly", delay);
                 }
                 break;
             case BirdStateEnum.flyToSeed:
