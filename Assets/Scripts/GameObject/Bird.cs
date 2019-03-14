@@ -15,9 +15,15 @@ public class Bird : MonoBehaviour
 
     float delay = 0;
     enum BirdStateEnum { wait,flyToSeed,flyToNest,pauseOnNest,flyAway}
+
+    public bool isForLeaf;
+
+    GameObject targetObject;
+    string targetTag;
+
     BirdStateEnum birdStateEnum;
     GameObject nestCover;
-    Seed seed;
+    ColliderObject colliderObject;
     
     float currentTime;
     Rigidbody2D rb;
@@ -29,6 +35,17 @@ public class Bird : MonoBehaviour
         delay = Random.Range(delayMin, delayMax);
 
         nestCover = transform.parent.Find("nest_cover").gameObject;
+
+        if (isForLeaf)
+        {
+            targetObject = GameObject.Find("leaf");
+            targetTag = "leaf";
+        }
+        else
+        {
+            targetObject = GameObject.Find("seed");
+            targetTag = "seed";
+        }
     }
 
     void StartFly()
@@ -36,19 +53,24 @@ public class Bird : MonoBehaviour
         birdStateEnum = BirdStateEnum.flyToSeed;
 
         flyStartPosition = transform.position;
-        target = GameObject.Find("seed").transform.position;
+        target = targetObject.transform.position;
         direction = (target - flyStartPosition).normalized;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (birdStateEnum == BirdStateEnum.flyToSeed && collision.tag == "seed")
+        if (birdStateEnum == BirdStateEnum.flyToSeed && collision.tag == targetTag)
         {
-            seed = collision.GetComponent<Seed>();
-            seed.RemoveCollider();
-            seed.transform.rotation = Quaternion.identity;
-            seed.transform.position = transform.Find("beak").position;
-            seed.transform.parent = transform;
+            colliderObject = collision.GetComponent<ColliderObject>();
+            if(colliderObject == null)
+            {
+                Debug.LogError("collider does not exist on " + collision.gameObject);
+                return;
+            }
+            colliderObject.RemoveCollider();
+            colliderObject.transform.rotation = Quaternion.identity;
+            colliderObject.transform.position = transform.Find("beak").position;
+            colliderObject.transform.parent = transform;
             birdStateEnum = BirdStateEnum.flyToNest;
 
             //hide nest cover
@@ -63,9 +85,9 @@ public class Bird : MonoBehaviour
 
     void DropSeed()
     {
-        seed.RecoverCollider();
-        seed.transform.parent = null;
-        seed.rb.velocity = new Vector3(0, -1, 0);
+        colliderObject.RecoverCollider();
+        colliderObject.transform.parent = null;
+        colliderObject.rb.velocity = new Vector3(0, -1, 0);
         birdStateEnum = BirdStateEnum.flyAway;
         nestCover.SetActive(true);
     }
@@ -80,11 +102,16 @@ public class Bird : MonoBehaviour
         switch (birdStateEnum)
         {
             case BirdStateEnum.wait:
-                if(Seed.Instance.transform.position.y<transform.position.y - birdFlyTriggerHeight) { 
-                    Invoke("StartFly", delay);
+                if(targetObject.transform.position.y<transform.position.y - birdFlyTriggerHeight) { 
+                    Invoke("StartFly", isForLeaf?0: delay);
                 }
                 break;
             case BirdStateEnum.flyToSeed:
+                if (isForLeaf)
+                {
+                    target = targetObject.transform.position;
+                    direction = (target - transform.position).normalized;
+                }
                 rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
                 break;
             case BirdStateEnum.flyToNest:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 247574751200618706}
   - component: {fileID: 247574751200618711}
   - component: {fileID: 247574751200618708}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: branch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
