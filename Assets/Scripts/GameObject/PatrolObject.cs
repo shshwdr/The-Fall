@@ -39,7 +39,7 @@ public class PatrolObject: MonoBehaviour
         Vector3 endPos = patrols[1].position;
 
         // completion defaults to null if not passed in
-        gameObject.Tween("moveCloud", startPos, endPos, movingTime, TweenScaleFunctions.Linear, updateCirclePos)
+        gameObject.Tween("moveCloud"+transform.parent.name, startPos, endPos, movingTime, TweenScaleFunctions.Linear, updateCirclePos)
             .ContinueWith(new Vector3Tween().Setup(endPos, startPos, movingTime, TweenScaleFunctions.Linear, updateCirclePos, circleMoveCompleted));
     }
     // Update is called once per frame
