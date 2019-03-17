@@ -69,6 +69,12 @@ TagManager:
   - name: ground
     uniqueID: 2836818825
     locked: 0
+  - name: spiderWeb
+    uniqueID: 2994129115
+    locked: 0
+  - name: spider
+    uniqueID: 2479483579
+    locked: 0
   - name: trunk
     uniqueID: 2578687341
     locked: 0

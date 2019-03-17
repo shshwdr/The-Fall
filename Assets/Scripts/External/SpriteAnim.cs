@@ -9,7 +9,7 @@ public class SpriteAnim : MonoBehaviour
     //The file location of the sprites within the resources folder
     public string location;
     private SpriteRenderer spr;
-    Sprite[] sprites;
+    public Sprite[] sprites;
     public int spriteNum
     {
         get { return sprites.Length; }
@@ -25,19 +25,30 @@ public class SpriteAnim : MonoBehaviour
     private void Start()
     {
         if (!initByOthers) {
-        spr = GetComponent<SpriteRenderer>();
 
-        sprites = Resources.LoadAll<Sprite>("animSprite/" + location);
-        finishedInit = true;
+            P_init();
         }
     }
     public void Init()
     {
-        spr = GetComponent<SpriteRenderer>();
-        
-        sprites = Resources.LoadAll<Sprite>("animSprite/"+location);
-        finishedInit = true;
+        P_init();
         isPaused = true;
+    }
+
+    public void P_init()
+    {
+
+        spr = GetComponent<SpriteRenderer>();
+
+        if (location.Length > 0)
+        {
+            sprites = Resources.LoadAll<Sprite>("animSprite/" + location);
+        }
+        else
+        {
+
+        }
+        finishedInit = true;
     }
 
     public void ResetAnim()
