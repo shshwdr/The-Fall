@@ -11,7 +11,8 @@ public class StickyObject : MonoBehaviour
     public float angularDrag = 0.5f;
     public bool attachSeedOnIt = false;
     float originalAngularDrag = 0.05f;
-
+    public bool caughtSeed;
+    public Transform root;
 
     Collider2D _collision;
     
@@ -20,13 +21,14 @@ public class StickyObject : MonoBehaviour
         if (collision.tag == "seed")
         {
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector3(0, rb.velocity.y * immediateJumpChange, 0);
+            rb.velocity = new Vector3(rb.velocity.x * immediateJumpChange, rb.velocity.y * immediateJumpChange, 0);
             rb.angularDrag = originalAngularDrag;
             if (attachSeedOnIt)
             {
 
-                rb.transform.parent = null;
+                rb.transform.SetParent(null, true);
             }
+            caughtSeed = false;
             _collision = null;
         }
     }
@@ -35,12 +37,13 @@ public class StickyObject : MonoBehaviour
         if (collision.tag == "seed")
         {
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector3(0, rb.velocity.y / immediateFallChange, 0);
+            rb.velocity = new Vector3(rb.velocity.x/immediateFallChange, rb.velocity.y / immediateFallChange, 0);
             if (attachSeedOnIt)
             {
-                rb.transform.parent = transform;
+                rb.transform.SetParent(root? root : transform, true);
             }
             rb.angularDrag = angularDrag;
+            caughtSeed = true;
             _collision = collision;
         }
     }
@@ -50,7 +53,7 @@ public class StickyObject : MonoBehaviour
         if (_collision != null)
         {
             Rigidbody2D rb = _collision.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector3(0, rb.velocity.y / slowDownRate, 0);
+            rb.velocity = new Vector3(rb.velocity.x/slowDownRate, rb.velocity.y / slowDownRate, 0);
         }
     }
 }

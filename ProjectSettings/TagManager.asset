@@ -51,6 +51,9 @@ TagManager:
   - name: branch
     uniqueID: 3913264263
     locked: 0
+  - name: spiderWeb
+    uniqueID: 2994129115
+    locked: 0
   - name: seed
     uniqueID: 4140817833
     locked: 0
@@ -68,9 +71,6 @@ TagManager:
     locked: 0
   - name: ground
     uniqueID: 2836818825
-    locked: 0
-  - name: spiderWeb
-    uniqueID: 2994129115
     locked: 0
   - name: spider
     uniqueID: 2479483579
