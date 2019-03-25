@@ -70,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -366244763
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300002, guid: 4baa3dc980f65094e9253c610e9c1572, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -95,7 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23154bf9e3693aa4ea67e26af28fd098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingSpeed: 1
   movingTime: 5
+  setStartPosition: 0
   patrols:
   - {fileID: 5849330695151781571}
   - {fileID: 5849330694903982513}
@@ -189,6 +191,7 @@ MonoBehaviour:
   angularDrag: 0.5
   attachSeedOnIt: 1
   caughtSeed: 0
+  root: {fileID: 0}
 --- !u!1 &5849330694903982478
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5849330694903982478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77, y: 0.1800003, z: 0}
+  m_LocalPosition: {x: 0.77, y: 0.011, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5849330696317280676}
@@ -243,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5849330695151781568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.47, y: 0.04, z: 0}
+  m_LocalPosition: {x: -1.428, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5849330696317280676}
