@@ -25,6 +25,8 @@
 public static class GPGSIds
 {
         public const string leaderboard_total_stars = "CgkIvvHXlNUCEAIQAQ"; // <GPGSID>
+        public const string achievement_twinkle_twinkle_little_star = "CgkIvvHXlNUCEAIQAw"; // <GPGSID>
+        public const string achievement_grow_your_first_seed = "CgkIvvHXlNUCEAIQAg"; // <GPGSID>
 
 }
 
