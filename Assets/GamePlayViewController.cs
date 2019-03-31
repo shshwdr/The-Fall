@@ -7,7 +7,13 @@ using UnityEngine.UI;
 
 public class GamePlayViewController : MonoBehaviour
 {
-    public Text authStatus;
+    public GameObject signedInObject;
+    public GameObject unSignedInObject;
+    public GameObject moreItemsObject;
+    int retryTime = 3;
+    int currentRetry;
+    bool hasOpenedMoreItems;
+    //public Text authStatus;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +28,15 @@ public class GamePlayViewController : MonoBehaviour
         // Initialize and activate the platform
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.Activate();
-
-        PlayGamesPlatform.Instance.Authenticate(SignInCallback, true);
+        UpdateSignedInUI(false);
+        moreItemsObject.SetActive(false);
+        PlayGamesPlatform.Instance.Authenticate(SignInCallback, false);
     }
-
+    public void UpdateSignedInUI(bool signed = true)
+    {
+        signedInObject.SetActive(signed);
+        unSignedInObject.SetActive(!signed);
+    }
     public void SignInCallback(bool success)
     {
         if (success)
@@ -33,18 +44,22 @@ public class GamePlayViewController : MonoBehaviour
             Debug.Log("(Lollygagger) Signed in!");
 
             // Change sign-in button text
-            GetComponent<Dropdown>().options[0].text = "Sign out";
-
+            //GetComponent<Dropdown>().options[0].text = "Sign out";
+            UpdateSignedInUI();
             // Show the user's name
-            authStatus.text = "Signed in as: " + Social.localUser.userName;
+            //authStatus.text = "Signed in as: " + Social.localUser.userName;
         }
         else
         {
             Debug.Log("(Lollygagger) Sign-in failed...");
-
+            currentRetry += 1;
+            if (currentRetry <= retryTime)
+            {
+                PlayGamesPlatform.Instance.Authenticate(SignInCallback, false);
+            }
             // Show failure message
-            GetComponent<Dropdown>().options[0].text = "Sign in";
-            authStatus.text = "Sign-in failed";
+            //GetComponent<Dropdown>().options[0].text = "Sign in";
+            //authStatus.text = "Sign-in failed";
         }
     }
 
@@ -54,6 +69,7 @@ public class GamePlayViewController : MonoBehaviour
         {
             // Sign in with Play Game Services, showing the consent dialog
             // by setting the second parameter to isSilent=false.
+            currentRetry = 0;
             PlayGamesPlatform.Instance.Authenticate(SignInCallback, false);
         }
         else
@@ -62,8 +78,8 @@ public class GamePlayViewController : MonoBehaviour
             PlayGamesPlatform.Instance.SignOut();
 
             // Reset UI
-            GetComponent<Dropdown>().options[0].text = "Sign In";
-            authStatus.text = "";
+            //GetComponent<Dropdown>().options[0].text = "Sign In";
+            //authStatus.text = "";
         }
     }
 
@@ -109,6 +125,12 @@ public class GamePlayViewController : MonoBehaviour
         {
             Debug.Log("Cannot show Achievements, not logged in");
         }
+    }
+
+    public void ToggleMoreItems()
+    {
+        moreItemsObject.SetActive(!hasOpenedMoreItems);
+        hasOpenedMoreItems = !hasOpenedMoreItems;
     }
     // Update is called once per frame
     void Update()
