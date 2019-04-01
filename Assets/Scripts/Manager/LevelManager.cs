@@ -76,6 +76,21 @@ public class LevelManager : Singleton<LevelManager>
                 levelUnlockDict[levelInfo.identifier] = false;
             }
         }
+        foreach (StageInfo stageInfo in stageInfoList)
+        {
+            bool allFinished = true;
+            foreach(LevelInfo levelInfo in levelInfoByStageId[stageInfo.identifier])
+            {
+                if (PersistentDataManager.Instance.isFinishedByLevelId[levelInfo.identifier]){
+                    allFinished = false;
+                    break;
+                }
+            }
+            if (allFinished)
+            {
+                AchievementManager.Instance.UnlockAchievement(AchievementManager.Instance.stageIdToAchievement[stageInfo.identifier]);
+            }
+        }
     }
     public void LoadLevel(string levelId)
     {

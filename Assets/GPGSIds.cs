@@ -24,8 +24,13 @@
 
 public static class GPGSIds
 {
+        public const string achievement_twinkle_twinkle_little_star_ii = "CgkIvvHXlNUCEAIQBA"; // <GPGSID>
+        public const string achievement_twinkle_twinkle_little_star_iv = "CgkIvvHXlNUCEAIQBg"; // <GPGSID>
+        public const string achievement_the_rainbow_is_a_promise = "CgkIvvHXlNUCEAIQCA"; // <GPGSID>
+        public const string achievement_twinkle_twinkle_little_star_iii = "CgkIvvHXlNUCEAIQBQ"; // <GPGSID>
         public const string leaderboard_total_stars = "CgkIvvHXlNUCEAIQAQ"; // <GPGSID>
-        public const string achievement_twinkle_twinkle_little_star = "CgkIvvHXlNUCEAIQAw"; // <GPGSID>
+        public const string achievement_twinkle_twinkle_little_star_i = "CgkIvvHXlNUCEAIQAw"; // <GPGSID>
+        public const string achievement_what_a_great_day_for_football_all_we_need_is_some_green_grass_and_a_ball = "CgkIvvHXlNUCEAIQBw"; // <GPGSID>
         public const string achievement_grow_your_first_seed = "CgkIvvHXlNUCEAIQAg"; // <GPGSID>
 
 }

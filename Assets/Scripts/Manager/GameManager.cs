@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager>
         }
         IsWin = true;
         PersistentDataManager.Instance.RecordStar(LevelManager.Instance.currentLevelId, starNum);
+        AchievementManager.Instance.UnlockAchievement(GPGSIds.achievement_grow_your_first_seed);
     }
 
 

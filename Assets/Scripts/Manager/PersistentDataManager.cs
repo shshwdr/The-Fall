@@ -45,6 +45,7 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
             SavePersistentData(levelId, star);
             LoadPersistentData(levelId);
             LevelManager.Instance.UpdateWithPersistentData();
+            AchievementManager.Instance.CollectStar(diff);
         }
     }
     public void UnlockAll()
