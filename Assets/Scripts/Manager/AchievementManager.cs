@@ -12,9 +12,10 @@ public class AchievementManager : Singleton<AchievementManager>
         { "rain", GPGSIds.achievement_the_rainbow_is_a_promise } };
     public void IncrementAchievement(string str, int value, System.Action<bool> callback = null)
     {
-            //(bool success) => {
-            //  Debug.Log("(Lollygagger) Welcome Unlock: " + sssuccess);
-            //})
+        //(bool success) => {
+        //  Debug.Log("(Lollygagger) Welcome Unlock: " + sssuccess);
+        //})
+        Debug.Log(str + " will increment " + value);
         if (Social.localUser.authenticated)
         {
             PlayGamesPlatform.Instance.IncrementAchievement(
@@ -36,6 +37,7 @@ public class AchievementManager : Singleton<AchievementManager>
 
     public void UnlockAchievement(string str, float value = 100, System.Action<bool> callback = null)
     {
+        Debug.Log(str + " will unlock " + value);
         if (Social.localUser.authenticated)
         {
             PlayGamesPlatform.Instance.ReportProgress(

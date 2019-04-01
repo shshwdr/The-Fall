@@ -78,7 +78,11 @@ public class LevelManager : Singleton<LevelManager>
         }
         foreach (StageInfo stageInfo in stageInfoList)
         {
-            bool allFinished = true;
+            if (!stageUnlockDict[stageInfo.identifier])
+            {
+                continue;
+            }
+                bool allFinished = true;
             foreach(LevelInfo levelInfo in levelInfoByStageId[stageInfo.identifier])
             {
                 if (PersistentDataManager.Instance.isFinishedByLevelId[levelInfo.identifier]){
