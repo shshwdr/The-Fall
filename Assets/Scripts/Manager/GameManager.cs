@@ -39,7 +39,11 @@ public class GameManager : Singleton<GameManager>
         AchievementManager.Instance.UnlockAchievement(GPGSIds.achievement_grow_your_first_seed);
     }
 
-
+    public void UIGameOver()
+    {
+        IsGameOver = true;
+        Seed.Instance.gameObject.SetActive(false);
+    }
 
     public void GameOver()
     {

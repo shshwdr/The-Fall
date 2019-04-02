@@ -46,7 +46,7 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
             LoadPersistentData(levelId);
             LevelManager.Instance.UpdateWithPersistentData();
             AchievementManager.Instance.CollectStar(diff);
-            LeaderboardManager.Instance.ReportScore(GPGSIds.leaderboard_total_stars, diff);
+            LeaderboardManager.Instance.ReportScore(GPGSIds.leaderboard_total_stars, totalStar);
         }
     }
     public void UnlockAll()

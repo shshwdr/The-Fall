@@ -58,6 +58,7 @@ public class Star : MonoBehaviour
         }
         if (collision.tag == "seed")
         {
+            AchievementManager.Instance.UnlockAchievement(GPGSIds.achievement_twinkle_twinkle_little_star_i);
             GameManager.Instance.CollectStar();
             GetComponent<PolygonCollider2D>().enabled = false;
             TweenMove();

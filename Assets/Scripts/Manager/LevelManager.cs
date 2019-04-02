@@ -85,7 +85,7 @@ public class LevelManager : Singleton<LevelManager>
                 bool allFinished = true;
             foreach(LevelInfo levelInfo in levelInfoByStageId[stageInfo.identifier])
             {
-                if (PersistentDataManager.Instance.isFinishedByLevelId[levelInfo.identifier]){
+                if (!PersistentDataManager.Instance.isFinishedByLevelId[levelInfo.identifier]){
                     allFinished = false;
                     break;
                 }

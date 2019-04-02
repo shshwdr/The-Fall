@@ -52,8 +52,8 @@ public class GameEndViewController : MonoBehaviour
 
     void Init(bool win)
     {
-        backToMenuButton.onClick.AddListener(delegate { SceneManager.LoadScene("mainMenu"); Time.timeScale = 1; });
-        restartButton.onClick.AddListener(delegate { GameManager.Instance.Restart(); Time.timeScale = 1; });
+        backToMenuButton.onClick.AddListener(delegate { GameManager.Instance.UIGameOver(); SceneManager.LoadScene("mainMenu"); Time.timeScale = 1; });
+        restartButton.onClick.AddListener(delegate { GameManager.Instance.UIGameOver(); GameManager.Instance.Restart(); Time.timeScale = 1; });
         if (isPause)
         {
             foreach(ResultPageStar star in stars)
@@ -73,7 +73,7 @@ public class GameEndViewController : MonoBehaviour
         }
         resultText.text = isPause? "Resume" :(win ? "Succeed" : "failed");
         if (LevelManager.Instance.NextLevelUnklocked()) { 
-            nextLevelButton.onClick.AddListener(delegate { LevelManager.Instance.LoadNextLevel(); Time.timeScale = 1; });
+            nextLevelButton.onClick.AddListener(delegate { GameManager.Instance.UIGameOver(); LevelManager.Instance.LoadNextLevel(); Time.timeScale = 1; });
         }
         else
         {
