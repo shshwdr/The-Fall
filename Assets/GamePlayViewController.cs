@@ -28,7 +28,7 @@ public class GamePlayViewController : MonoBehaviour
         // Initialize and activate the platform
         PlayGamesPlatform.InitializeInstance(config);
         PlayGamesPlatform.Activate();
-        UpdateSignedInUI(false);
+        //UpdateSignedInUI(false);
         moreItemsObject.SetActive(false);
         PlayGamesPlatform.Instance.Authenticate(SignInCallback, false);
     }
@@ -82,28 +82,7 @@ public class GamePlayViewController : MonoBehaviour
             //authStatus.text = "";
         }
     }
-
-    public void SelectDropdown(int index)
-    {
-        switch (index)
-        {
-            case 0:
-                SignIn();
-                break;
-            case 1:
-                ShowLeaderboards();
-                break;
-            case 2:
-                ShowAchievements();
-                break;
-            //case 3:
-            //    SignIn();
-            //    break;
-            default:
-                Debug.LogError("index " + index + " does not support in dropdown box");
-                break;
-        }
-    }
+    
     public void ShowLeaderboards()
     {
         if (PlayGamesPlatform.Instance.localUser.authenticated)
