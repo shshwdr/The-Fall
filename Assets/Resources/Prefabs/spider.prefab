@@ -333,8 +333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectWidthRange: 0.5
   moveDownSpeed: 6
-  moveUpSpeed: 1
-  detectHeightRange: 6
+  moveUpSpeed: 2
+  detectHeightRange: 5
   web: {fileID: 1229132868340019612}
 --- !u!1 &1229132867816674096
 GameObject:
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55e9d1ab3cece4846bf71651a23575b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowDownRate: 1.25
+  slowDownRate: 1.1
   immediateFallChange: 100
   immediateJumpChange: 3
   angularDrag: 0.5

@@ -14,7 +14,7 @@ public class Spider : MonoBehaviour
     float targetY = 0f;
     string targetTag;
     Rigidbody2D rb;
-    enum SpiderStateEnum { wait, rushToSeed, moveBack}
+    enum SpiderStateEnum { wait, rushToSeed, moveBack,end}
     SpiderStateEnum spiderStateEnum;
     // Start is called before the first frame update
     void Start()
@@ -56,7 +56,7 @@ public class Spider : MonoBehaviour
                     ColliderObject colliderObject = targetObject.GetComponent<ColliderObject>();
                     colliderObject.RecoverCollider();
                     colliderObject.rb.transform.SetParent(null, true);
-                    spiderStateEnum = SpiderStateEnum.wait;
+                    spiderStateEnum = SpiderStateEnum.end;
                 }
                 break;
         }
